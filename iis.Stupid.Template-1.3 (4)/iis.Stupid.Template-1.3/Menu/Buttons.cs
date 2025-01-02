@@ -10,7 +10,7 @@ namespace StupidTemplate.Menu
         {
             new ButtonInfo[] { // Main Mods
                 new ButtonInfo { buttonText = "Settings", method =() => SettingsMods.EnterSettings(), isTogglable = false, toolTip = "Opens the main settings page for the menu."},
-                new ButtonInfo { buttonText = "regular placeholder", isTogglable = false},
+                new ButtonInfo { buttonText = "Mosa Speed", method =() => Mods.Mods.MosaSpeed(), toolTip = "Weeeeeee"},
                 new ButtonInfo { buttonText = "togglable placeholder"},
                 new ButtonInfo { buttonText = "regular placeholder 2", isTogglable = false},
                 new ButtonInfo { buttonText = "togglable placeholder 2"},
