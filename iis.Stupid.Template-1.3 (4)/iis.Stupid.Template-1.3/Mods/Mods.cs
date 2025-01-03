@@ -61,16 +61,12 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
             }
         }
-
-        internal class Fly
+        public static void FlyMod()
         {
-            public static void FlyMod()
+            if (ControllerInputPoller.instance.rightControllerPrimaryButton)
             {
-                if (ControllerInputPoller.instance.rightControllerPrimaryButton)
-                {
-                    GorillaLocomotion.Player.Instance.transform.position += (GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime) * 15;
-                    GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                }
+               GorillaLocomotion.Player.Instance.transform.position += (GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime) * 15;
+               GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
 
