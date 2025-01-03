@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using BepInEx;
+using Photon.Pun;
 using Photon.Realtime;
 using StupidTemplate.Notifications;
 using System;
@@ -138,7 +139,20 @@ namespace StupidTemplate.Mods
             GorillaLocomotion.Player.Instance.jumpMultiplier = 1.2f;
         }
 
-
+        public static void Noclip()
+        {
+            foreach (MeshCollider meshCollider in Resources.FindObjectsOfTypeAll<MeshCollider>())
+            {
+                if (ControllerInputPoller.instance.leftControllerIndexFloat > 0f || UnityInput.Current.GetMouseButton(1))
+                {
+                    meshCollider.enabled = false;
+                }
+                else
+                {
+                    meshCollider.enabled = true;
+                }
+            }
+        }
 
     }
 }
