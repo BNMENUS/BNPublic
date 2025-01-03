@@ -28,38 +28,11 @@ namespace StupidTemplate.Mods
             GorillaLocomotion.Player.Instance.transform.localScale = new Vector3(2f, 2f, 2f);
         }
 
-        public static void UntagAll()
-        {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                NotifiLib.SendNotification("<color=grey>[</color><color=red>ERROR</color><color=grey>]</color> <color=white>You are not master client.</color>");
-            }
-            else
-            {
-                foreach (Photon.Realtime.Player v in PhotonNetwork.PlayerList)
-                {
-                    RemoveInfected(v);
-                }
-            }
-        }
-
-        private static void RemoveInfected(Player v)
-        {
-            throw new NotImplementedException();
-        }
-
         public static void GhostMonkey()
         {
-            bool Primary = ControllerInputPoller.instance.rightControllerPrimaryButton;
+            if (ControllerInputPoller.instance.rightControllerSecondaryButton)
             {
-                if (Primary == true)
-                {
-                    GorillaTagger.Instance.offlineVRRig.enabled = false;
-                }
-                else
-                {
-                    GorillaTagger.Instance.offlineVRRig.enabled = true;
-                }
+                GorillaTagger.Instance.offlineVRRig.enabled != GorillaTagger.Instance.offlineVRRig.enabled;
             }
         }
 
