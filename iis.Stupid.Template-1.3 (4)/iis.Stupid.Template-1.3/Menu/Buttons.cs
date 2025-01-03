@@ -20,14 +20,12 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "togglable placeholder 4"},
                 new ButtonInfo { buttonText = "Really Long Arms", method =() => Mods.Mods.ReallyLongArms(), toolTip = "Longer Long Arms"},
                 new ButtonInfo { buttonText = "togglable placeholder 5"},
-                new ButtonInfo { buttonText = "Waterballoon Spam", method =() => Mods.Mods.WaterBalloonSpammer(), toolTip = "Spam Water Balloons"},
-                new ButtonInfo { buttonText = "togglable placeholder 6"},
                 new ButtonInfo { buttonText = "Ghost Monkey", method =() => Mods.Mods.GhostMonkey(), toolTip = "Turn Into a Ghost"},
-                new ButtonInfo { buttonText = "togglable placeholder 7"},
+                new ButtonInfo { buttonText = "togglable placeholder 6"},
                 new ButtonInfo { buttonText = "Wall Walk", method =() => Mods.Mods.Wallwalk(), toolTip = "Walk on Walls"},
-                new ButtonInfo { buttonText = "togglable placeholder 8"},
+                new ButtonInfo { buttonText = "togglable placeholder 7"},
                 new ButtonInfo { buttonText = "Spaz Monkey", method =() => Mods.Mods.SpazMonke(), toolTip = "Bros tweaking"},
-                new ButtonInfo { buttonText = "togglable placeholder 9"},
+                new ButtonInfo { buttonText = "togglable placeholder 8"},
             },
 
             new ButtonInfo[] { // Settings

@@ -28,21 +28,6 @@ namespace StupidTemplate.Mods
             GorillaLocomotion.Player.Instance.transform.localScale = new Vector3(2f, 2f, 2f);
         }
 
-        public static void WaterBalloonSpammer()
-        {
-            if (ControllerInputPoller.instance.rightGrab)
-            {
-                UnityEngine.Object.Destroy(GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").GetComponent<AudioSource>());
-                GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").GetComponent<SnowballThrowable>().projectilePrefab.tag = "WaterBalloonProjectile";
-                GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").GetComponent<SnowballThrowable>().randomizeColor = false;
-                return;
-            }
-            if (!GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").gameObject.GetComponent<AudioSource>())
-            {
-                GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").gameObject.AddComponent<AudioSource>();
-            }
-        }
-
         public static void UntagAll()
         {
             if (!PhotonNetwork.IsMasterClient)
