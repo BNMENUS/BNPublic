@@ -3,6 +3,7 @@ using Microsoft.Cci;
 using ModIO;
 using Photon.Pun;
 using Photon.Realtime;
+using StupidTemplate.Menu;
 using StupidTemplate.Notifications;
 using System;
 using System.Collections.Generic;
@@ -151,10 +152,85 @@ namespace StupidTemplate.Mods
             if (disconnectbutton <= 16) disconnectbutton++;
             if (disconnectbutton >= 16) disconnectbutton = 0;
         }
-
+        public static string disconnectbuttonstring = "";
         public static void DisconnectOnButton()
         {
-
+            switch (disconnectbutton)
+            {
+                case 0:
+                    {
+                        if (ControllerInputPoller.instance.rightControllerSecondaryButton)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Right Secondary}";
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Right Primary}";
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        if (ControllerInputPoller.instance.leftControllerSecondaryButton)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Left Secondary}";
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        if (ControllerInputPoller.instance.leftControllerPrimaryButton)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Left Primary}";
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        if (ControllerInputPoller.instance.rightControllerIndexFloat <= 0.1f)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Right Trigger}";
+                        }
+                        break;
+                    }
+                case 5:
+                    {
+                        if (ControllerInputPoller.instance.rightGrab)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Right Grab}";
+                        }
+                        break;
+                    }
+                case 6:
+                    {
+                        if (ControllerInputPoller.instance.leftControllerIndexFloat <= 0.1f)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Left Trigger}";
+                        }
+                        break;
+                    }
+                case 7:
+                    {
+                        if (ControllerInputPoller.instance.leftGrab)
+                        {
+                            PhotonNetwork.Disconnect();
+                            disconnectbuttonstring = "Disconnect Button {Left Grab}";
+                        }
+                        break;
+                    }
+            }
+            Main.GetIndex("Disconnect Button").overlapText = disconnectbuttonstring;
         }
 
 
