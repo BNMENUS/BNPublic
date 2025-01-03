@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR;
 
 
@@ -16,6 +17,71 @@ namespace StupidTemplate.Mods
 {
     internal class Mods
     {
+        public static float x = -1f;
+        public static float y = -1f;
+        public static float drug = 0f;
+        public static float drugs = 0f;
+        public static void wasd()
+        {
+            GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = new Vector3(0f, 0.067f, 0f);
+
+            if (Mouse.current.rightButton.isPressed)
+            {
+                Vector3 sigmaboy = GorillaLocomotion.Player.Instance.rightControllerTransform.parent.rotation.eulerAngles;
+
+                if (x < 0)
+                {
+                    x = sigmaboy.y;
+                    drug = Mouse.current.position.value.x / UnityEngine.Screen.width;
+                }
+                if (y < 0)
+                {
+                    y = sigmaboy.x;
+                    drugs = Mouse.current.position.value.y / UnityEngine.Screen.height;
+                }
+
+                sigmaboy = new Vector3(y - ((((Mouse.current.position.value.y / UnityEngine.Screen.height) - drugs) * 360) * 1.3f), x + ((((Mouse.current.position.value.x / UnityEngine.Screen.width) - drug) * 360) * 1.3f), sigmaboy.z);
+                GorillaLocomotion.Player.Instance.rightControllerTransform.parent.rotation = Quaternion.Euler(sigmaboy);
+            }
+            else
+            {
+                x = -1;
+                y = -1;
+            }
+
+            float speed = 10f;
+            if (UnityInput.Current.GetKey(KeyCode.LeftShift))
+                speed *= 2f;
+            if (UnityInput.Current.GetKey(KeyCode.W))
+            {
+                GorillaTagger.Instance.rigidbody.transform.position += GorillaLocomotion.Player.Instance.rightControllerTransform.parent.forward * Time.deltaTime * speed;
+            }
+
+            if (UnityInput.Current.GetKey(KeyCode.S))
+            {
+                GorillaTagger.Instance.rigidbody.transform.position += GorillaLocomotion.Player.Instance.rightControllerTransform.parent.forward * Time.deltaTime * -speed;
+            }
+
+            if (UnityInput.Current.GetKey(KeyCode.A))
+            {
+                GorillaTagger.Instance.rigidbody.transform.position += GorillaLocomotion.Player.Instance.rightControllerTransform.parent.right * Time.deltaTime * -speed;
+            }
+
+            if (UnityInput.Current.GetKey(KeyCode.D))
+            {
+                GorillaTagger.Instance.rigidbody.transform.position += GorillaLocomotion.Player.Instance.rightControllerTransform.parent.right * Time.deltaTime * speed;
+            }
+
+            if (UnityInput.Current.GetKey(KeyCode.Space))
+            {
+                GorillaTagger.Instance.rigidbody.transform.position += new Vector3(0f, Time.deltaTime * speed, 0f);
+            }
+
+            if (UnityInput.Current.GetKey(KeyCode.LeftControl))
+            {
+                GorillaTagger.Instance.rigidbody.transform.position += new Vector3(0f, Time.deltaTime * -speed, 0f);
+            }
+        }
         public static void MosaSpeed()
         {
             GorillaLocomotion.Player.Instance.maxJumpSpeed = 7.5f;
@@ -43,17 +109,14 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.offlineVRRig.enabled = !GorillaTagger.Instance.offlineVRRig.enabled;
             }
         }
-
         public static void SpazMonke()
         {
-            {
-                GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
-                GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
-                GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
-                GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
-                GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
-                GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
-            }
+            GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
+            GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
+            GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
+            GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
+            GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
+            GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
         }
         public static void FlyMod()
         {
@@ -70,7 +133,7 @@ namespace StupidTemplate.Mods
         public static GameObject RightPlat;
         static bool rightdone = false;
         static bool leftdone = false;
-
+        
         public static void Platforms()
         {
             if (ControllerInputPoller.instance.rightGrab && !rightdone)
@@ -113,7 +176,6 @@ namespace StupidTemplate.Mods
             GorillaLocomotion.Player.Instance.maxJumpSpeed = 6.5f;
             GorillaLocomotion.Player.Instance.jumpMultiplier = 1.2f;
         }
-
         public static void Noclip()
         {
             foreach (MeshCollider meshCollider in Resources.FindObjectsOfTypeAll<MeshCollider>())
@@ -128,7 +190,6 @@ namespace StupidTemplate.Mods
                 }
             }
         }
-
         public static void AntiReport()
         {
             foreach (GorillaPlayerScoreboardLine line in GorillaScoreboardTotalUpdater.allScoreboardLines)
@@ -146,13 +207,60 @@ namespace StupidTemplate.Mods
                 }
             }
         }
-        public static int disconnectbutton;
+        public static int disconnectbutton = 0;
         public static void changedisconnectbutton()
         {
-            if (disconnectbutton <= 16) disconnectbutton++;
-            if (disconnectbutton >= 16) disconnectbutton = 0;
+            Main.GetIndex("Disconnect Button").overlapText = disconnectbuttonstring;
+
+            if (disconnectbutton <= 9) { disconnectbutton++; }
+
+            if (disconnectbutton >= 9) { disconnectbutton = 0; }
+
+            switch (disconnectbutton)
+            {
+                case 0:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Right Secondary}";
+                        break;
+                    }
+                case 1:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Right Primary}";
+                        break;
+                    }
+                case 2:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Left Secondary}";
+                        break;
+                    }
+                case 3:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Left Primary}";
+                        break;
+                    }
+                case 4:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Right Trigger}";
+                        break;
+                    }
+                case 5:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Right Grab}";
+                        break;
+                    }
+                case 6:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Left Trigger}";
+                        break;
+                    }
+                case 7:
+                    {
+                        disconnectbuttonstring = "Disconnect Button {Left Grab}";
+                        break;
+                    }
+            }
         }
-        public static string disconnectbuttonstring = "";
+        public static string disconnectbuttonstring = "bvb";
         public static void DisconnectOnButton()
         {
             switch (disconnectbutton)
@@ -162,7 +270,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.rightControllerSecondaryButton)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Right Secondary}";
                         }
                         break;
                     }
@@ -171,7 +278,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.rightControllerPrimaryButton)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Right Primary}";
                         }
                         break;
                     }
@@ -180,7 +286,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.leftControllerSecondaryButton)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Left Secondary}";
                         }
                         break;
                     }
@@ -189,7 +294,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.leftControllerPrimaryButton)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Left Primary}";
                         }
                         break;
                     }
@@ -198,7 +302,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.rightControllerIndexFloat <= 0.1f)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Right Trigger}";
                         }
                         break;
                     }
@@ -207,7 +310,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.rightGrab)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Right Grab}";
                         }
                         break;
                     }
@@ -216,7 +318,6 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.leftControllerIndexFloat <= 0.1f)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Left Trigger}";
                         }
                         break;
                     }
@@ -225,14 +326,18 @@ namespace StupidTemplate.Mods
                         if (ControllerInputPoller.instance.leftGrab)
                         {
                             PhotonNetwork.Disconnect();
-                            disconnectbuttonstring = "Disconnect Button {Left Grab}";
                         }
                         break;
                     }
             }
-            Main.GetIndex("Disconnect Button").overlapText = disconnectbuttonstring;
         }
-
-
+        public static void hhdf()
+        {
+            if (ControllerInputPoller.instance.rightControllerIndexFloat <= 0.1f && ControllerInputPoller.instance.rightGrab || Mouse.current.rightButton.isPressed)
+            {
+                GorillaTagger.Instance.leftHandTransform.transform.position = GorillaTagger.Instance.offlineVRRig.transform.position + new Vector3(0, -1, 0);
+                GorillaTagger.Instance.rightHandTransform.transform.position = GorillaTagger.Instance.offlineVRRig.transform.position + new Vector3(0, -1, 0);
+            }
+        }
     }
 }
