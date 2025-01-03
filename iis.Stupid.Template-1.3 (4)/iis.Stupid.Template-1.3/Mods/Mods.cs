@@ -70,5 +70,24 @@ namespace StupidTemplate.Mods
             }
         }
 
+        public static void DisplayBoxESP()
+        {
+            foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+            {
+                if (vrrig != GorillaTagger.Instance.offlineVRRig)
+                {
+                    UnityEngine.Color thecolor = vrrig.playerColor;
+                    GameObject box = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    box.transform.position = vrrig.transform.position;
+                    UnityEngine.Object.Destroy(box.GetComponent<BoxCollider>());
+                    box.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    box.transform.LookAt(GorillaTagger.Instance.headCollider.transform.position);
+                    box.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
+                    box.GetComponent<Renderer>().material.color = thecolor;
+                    UnityEngine.Object.Destroy(box, 0.1f); // Destroy after a short delay
+                }
+            }
         }
+
+    }
 }
