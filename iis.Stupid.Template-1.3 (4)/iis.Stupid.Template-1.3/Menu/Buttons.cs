@@ -16,7 +16,6 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Long Arms", method =() => Mods.Mods.LongArms(), toolTip = "Long Arms", disableMethod =() => Mods.Mods.NormalArms()},
                 new ButtonInfo { buttonText = "Really Long Arms", method =() => Mods.Mods.ReallyLongArms(), toolTip = "Longer Long Arms", disableMethod =() => Mods.Mods.NormalArms()},
                 new ButtonInfo { buttonText = "Ghost Monkey", method =() => Mods.Mods.GhostMonkey(), toolTip = "Turn Into a Ghost"},
-                new ButtonInfo { buttonText = "Wall Walk", method =() => Mods.Mods.Wallwalk(), toolTip = "Walk on Walls"},
                 new ButtonInfo { buttonText = "Spaz Monkey", method =() => Mods.Mods.SpazMonke(), toolTip = "Bros tweaking"},
                 new ButtonInfo { buttonText = "Fly", method =() => Mods.Mods.FlyMod(), toolTip = "Become Superman"},
                 new ButtonInfo { buttonText = "No Clip", method =() => Mods.Mods.Noclip(), toolTip = "No colliders"},
