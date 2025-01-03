@@ -88,7 +88,10 @@ namespace StupidTemplate.Mods
                 }
             }
         }
-
+        
+        public static Material PlatColor = new Material(Shader.Find("GorillaTag/UberShader"));
+        public static GameObject LeftPlat;
+        public static GameObject RightPlat;
         static bool rightdone = false;
         static bool leftdone = false;
 
@@ -96,7 +99,7 @@ namespace StupidTemplate.Mods
         {
             if (ControllerInputPoller.instance.rightGrab && !rightdone)
             {
-                GameObject RightPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                RightPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 RightPlat.transform.position = new Vector3(0f, -0.05f, 0f) + GorillaLocomotion.Player.Instance.rightControllerTransform.position;
                 RightPlat.transform.rotation = GorillaLocomotion.Player.Instance.rightControllerTransform.rotation;
                 PlatColor.color = UnityEngine.Color.black;
@@ -112,8 +115,9 @@ namespace StupidTemplate.Mods
             }
             if (ControllerInputPoller.instance.leftGrab && !leftdone)
             {
-                GameObject LeftPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                LeftPlat.transform.position = new Vector3(0f, -0.05f, 0f) + GorillaLocomotion.Player.Instance.leftControllerTransform.position;
+                LeftPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                LeftPlat.transform.position = new Vector3(0f, -0.05f, 0f) +
+            GorillaLocomotion.Player.Instance.leftControllerTransform.position;
                 LeftPlat.transform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation;
                 PlatColor.color = UnityEngine.Color.black;
                 LeftPlat.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
@@ -133,6 +137,8 @@ namespace StupidTemplate.Mods
             GorillaLocomotion.Player.Instance.maxJumpSpeed = 6.5f;
             GorillaLocomotion.Player.Instance.jumpMultiplier = 1.2f;
         }
+
+
 
     }
 }
