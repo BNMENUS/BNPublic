@@ -1,4 +1,5 @@
-﻿using StupidTemplate.Classes;
+﻿using Microsoft.Cci;
+using StupidTemplate.Classes;
 using UnityEngine;
 using static StupidTemplate.Menu.Main;
 
@@ -24,7 +25,8 @@ namespace StupidTemplate
         public static bool disconnectButton = false;
         public static bool rightHanded = false;
         public static bool disableNotifications = false;
-
+        
+        
         public static KeyCode keyboardButton = KeyCode.Q;
 
         public static Vector3 menuSize = new Vector3(0.1f, 1f, 1f); // Depth, Width, Height

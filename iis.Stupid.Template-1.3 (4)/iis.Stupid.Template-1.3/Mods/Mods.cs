@@ -1,4 +1,6 @@
 ﻿using BepInEx;
+using Microsoft.Cci;
+using ModIO;
 using Photon.Pun;
 using Photon.Realtime;
 using StupidTemplate.Notifications;
@@ -37,7 +39,7 @@ namespace StupidTemplate.Mods
         {
             if (ControllerInputPoller.instance.rightControllerSecondaryButton)
             {
-                GorillaTagger.Instance.offlineVRRig.enabled = ! GorillaTagger.Instance.offlineVRRig.enabled;
+                GorillaTagger.Instance.offlineVRRig.enabled = !GorillaTagger.Instance.offlineVRRig.enabled;
             }
         }
 
@@ -70,12 +72,12 @@ namespace StupidTemplate.Mods
         {
             if (ControllerInputPoller.instance.rightControllerPrimaryButton)
             {
-               GorillaLocomotion.Player.Instance.transform.position += (GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime) * 15;
-               GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GorillaLocomotion.Player.Instance.transform.position += (GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime) * 15;
+                GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
 
-        
+
         public static Material PlatColor = new Material(Shader.Find("GorillaTag/UberShader"));
         public static GameObject LeftPlat;
         public static GameObject RightPlat;
@@ -139,6 +141,36 @@ namespace StupidTemplate.Mods
                 }
             }
         }
+
+        public static void AntiReport()
+        {
+            foreach (GorillaPlayerScoreboardLine line in GorillaScoreboardTotalUpdater.allScoreboardLines)
+            {
+                Transform report = line.reportButton.gameObject.transform;
+                foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
+                {
+                    float righthand = Vector3.Distance(vrrig.rightHandTransform.position, report.position);
+                    float lefthand = Vector3.Distance(vrrig.leftHandTransform.position, report.position);
+
+                    if (righthand >= 0.3f || lefthand >= 0.3f)
+                    {
+                        PhotonNetwork.Disconnect();
+                    }
+                }
+            }
+        }
+        public static int disconnectbutton;
+        public static void changedisconnectbutton()
+        {
+            if (disconnectbutton <= 16) disconnectbutton++;
+            if (disconnectbutton >= 16) disconnectbutton = 0;
+        }
+
+        public static void DisconnectOnButton()
+        {
+
+        }
+
 
     }
 }

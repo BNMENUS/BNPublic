@@ -20,6 +20,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Spaz Monkey", method =() => Mods.Mods.SpazMonke(), toolTip = "Bros tweaking"},
                 new ButtonInfo { buttonText = "Fly", method =() => Mods.Mods.FlyMod(), toolTip = "Become Superman"},
                 new ButtonInfo { buttonText = "No Clip", method =() => Mods.Mods.Noclip(), toolTip = "No colliders"},
+                new ButtonInfo { buttonText = "Disconnect Button", method =() => Mods.Mods.DisconnectButton(), toolTip = "Press A To disconnect you"},
             },
 
             new ButtonInfo[] { // Settings
@@ -27,6 +28,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Menu", method =() => SettingsMods.MenuSettings(), isTogglable = false, toolTip = "Opens the settings for the menu."},
                 new ButtonInfo { buttonText = "Movement", method =() => SettingsMods.MovementSettings(), isTogglable = false, toolTip = "Opens the movement settings for the menu."},
                 new ButtonInfo { buttonText = "Projectile", method =() => SettingsMods.ProjectileSettings(), isTogglable = false, toolTip = "Opens the projectile settings for the menu."},
+                new ButtonInfo { buttonText = "AntiReport", method =() => Mods.Mods.AntiReport(), isTogglable = true, toolTip = "If someone tries to report you, you disconnect"},
             },
 
             new ButtonInfo[] { // Menu Settings
