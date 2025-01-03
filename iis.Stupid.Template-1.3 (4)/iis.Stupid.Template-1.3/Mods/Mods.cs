@@ -32,7 +32,7 @@ namespace StupidTemplate.Mods
         {
             if (ControllerInputPoller.instance.rightControllerSecondaryButton)
             {
-                GorillaTagger.Instance.offlineVRRig.enabled != GorillaTagger.Instance.offlineVRRig.enabled;
+                GorillaTagger.Instance.offlineVRRig.enabled = ! GorillaTagger.Instance.offlineVRRig.enabled;
             }
         }
 
@@ -62,6 +62,17 @@ namespace StupidTemplate.Mods
             }
         }
 
+        internal class Fly
+        {
+            public static void FlyMod()
+            {
+                if (ControllerInputPoller.instance.rightControllerPrimaryButton)
+                {
+                    GorillaLocomotion.Player.Instance.transform.position += (GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime) * 15;
+                    GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                }
+            }
+        }
 
-    }
+        }
 }

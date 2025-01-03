@@ -17,6 +17,7 @@ namespace StupidTemplate.Menu
                 new ButtonInfo { buttonText = "Ghost Monkey", method =() => Mods.Mods.GhostMonkey(), toolTip = "Turn Into a Ghost"},
                 new ButtonInfo { buttonText = "Wall Walk", method =() => Mods.Mods.Wallwalk(), toolTip = "Walk on Walls"},
                 new ButtonInfo { buttonText = "Spaz Monkey", method =() => Mods.Mods.SpazMonke(), toolTip = "Bros tweaking"},
+                new ButtonInfo { buttonText = "", method =() => Mods.Mods.SpazMonke(), toolTip = "Become super man" },
             },
 
             new ButtonInfo[] { // Settings
