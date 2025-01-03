@@ -43,20 +43,6 @@ namespace StupidTemplate.Mods
             }
         }
 
-        public static void Wallwalk()
-        {
-            bool flag = ControllerInputPoller.GripFloat((XRNode)5) == 1f;
-            if (flag)
-            {
-                GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += GorillaLocomotion.Player.Instance.bodyCollider.transform.right / 7f;
-            }
-            bool flag2 = ControllerInputPoller.GripFloat((XRNode)4) == 1f;
-            if (flag2)
-            {
-                GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += -GorillaLocomotion.Player.Instance.bodyCollider.transform.right / 7f;
-            }
-        }
-
         public static void SpazMonke()
         {
             {
