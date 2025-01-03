@@ -84,7 +84,7 @@ namespace StupidTemplate.Mods
                     box.transform.LookAt(GorillaTagger.Instance.headCollider.transform.position);
                     box.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
                     box.GetComponent<Renderer>().material.color = thecolor;
-                    UnityEngine.Object.Destroy(box, 0.1f); // Destroy after a short delay
+                    UnityEngine.Object.Destroy(box, 0.1f);
                 }
             }
         }
