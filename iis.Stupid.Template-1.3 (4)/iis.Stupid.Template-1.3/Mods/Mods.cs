@@ -89,5 +89,50 @@ namespace StupidTemplate.Mods
             }
         }
 
+        static bool rightdone = false;
+        static bool leftdone = false;
+
+        public static void Platforms()
+        {
+            if (ControllerInputPoller.instance.rightGrab && !rightdone)
+            {
+                GameObject RightPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                RightPlat.transform.position = new Vector3(0f, -0.05f, 0f) + GorillaLocomotion.Player.Instance.rightControllerTransform.position;
+                RightPlat.transform.rotation = GorillaLocomotion.Player.Instance.rightControllerTransform.rotation;
+                PlatColor.color = UnityEngine.Color.black;
+                RightPlat.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
+                RightPlat.GetComponent<Renderer>().material = PlatColor;
+                RightPlat.transform.localScale = new Vector3(0.01f, 0.23f, 0.362569f);
+                rightdone = true;
+            }
+            else
+            {
+                UnityEngine.Object.Destroy(RightPlat);
+                rightdone = false;
+            }
+            if (ControllerInputPoller.instance.leftGrab && !leftdone)
+            {
+                GameObject LeftPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                LeftPlat.transform.position = new Vector3(0f, -0.05f, 0f) + GorillaLocomotion.Player.Instance.leftControllerTransform.position;
+                LeftPlat.transform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation;
+                PlatColor.color = UnityEngine.Color.black;
+                LeftPlat.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
+                LeftPlat.GetComponent<Renderer>().material = PlatColor;
+                LeftPlat.transform.localScale = new Vector3(0.01f, 0.23f, 0.362569f);
+                leftdone = true;
+            }
+            else
+            {
+                UnityEngine.Object.Destroy(LeftPlat);
+                leftdone = false;
+            }
+        }
+
+        public static void FixSpeed()
+        {
+            GorillaLocomotion.Player.Instance.maxJumpSpeed = 6.5f;
+            GorillaLocomotion.Player.Instance.jumpMultiplier = 1.2f;
+        }
+
     }
 }
