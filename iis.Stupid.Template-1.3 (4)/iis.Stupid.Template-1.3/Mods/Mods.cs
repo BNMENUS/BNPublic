@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.XR;
 
 
 namespace StupidTemplate.Mods
@@ -42,20 +43,6 @@ namespace StupidTemplate.Mods
             }
         }
 
-
-        private static GameObject CreatePlatformOnHand(Transform handTransform)
-        {
-            GameObject plat = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            plat.transform.localScale = new Vector3(0.025f, 0.3f, 0.4f);
-
-            plat.transform.position = handTransform.position;
-            plat.transform.rotation = handTransform.rotation;
-
-            float h = (Time.frameCount / 180f) % 1f;
-            plat.GetComponent<Renderer>().material.color = Color.blue;
-            return plat;
-        }
-
         public static void UntagAll()
         {
             if (!PhotonNetwork.IsMasterClient)
@@ -91,5 +78,32 @@ namespace StupidTemplate.Mods
             }
         }
 
+        public static void Wallwalk()
+        {
+            bool flag = ControllerInputPoller.GripFloat((XRNode)5) == 1f;
+            if (flag)
+            {
+                GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += GorillaLocomotion.Player.Instance.bodyCollider.transform.right / 7f;
+            }
+            bool flag2 = ControllerInputPoller.GripFloat((XRNode)4) == 1f;
+            if (flag2)
+            {
+                GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += -GorillaLocomotion.Player.Instance.bodyCollider.transform.right / 7f;
+            }
         }
+
+        public static void SpazMonke()
+        {
+            {
+                GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
+                GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
+                GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
+                GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
+                GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
+                GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
+            }
+        }
+
+
+    }
 }
