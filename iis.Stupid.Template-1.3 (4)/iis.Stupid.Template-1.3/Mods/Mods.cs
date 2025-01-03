@@ -29,6 +29,10 @@ namespace StupidTemplate.Mods
             GorillaLocomotion.Player.Instance.transform.localScale = new Vector3(2f, 2f, 2f);
         }
 
+        public static void NormalArms()
+        {
+            GorillaLocomotion.Player.Instance.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
         public static void GhostMonkey()
         {
             if (ControllerInputPoller.instance.rightControllerSecondaryButton)
