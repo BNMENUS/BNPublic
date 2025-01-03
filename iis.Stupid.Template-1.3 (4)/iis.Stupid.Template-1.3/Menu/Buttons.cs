@@ -11,21 +11,13 @@ namespace StupidTemplate.Menu
             new ButtonInfo[] { // Main Mods
                 new ButtonInfo { buttonText = "Settings", method =() => SettingsMods.EnterSettings(), isTogglable = false, toolTip = "Opens the main settings page for the menu."},
                 new ButtonInfo { buttonText = "Mosa Speed", method =() => Mods.Mods.MosaSpeed(), toolTip = "Weeeeeee"},
-                new ButtonInfo { buttonText = "togglable placeholder"},
                 new ButtonInfo { buttonText = "Platforms", method =() => Mods.Mods.MosaSpeed(), toolTip = "Platforms Mod"},
-                new ButtonInfo { buttonText = "togglable placeholder 2"},
                 new ButtonInfo { buttonText = "Untag All", method =() => Mods.Mods.UntagAll(), toolTip = "Untag everyone (Need to be master)"},
-                new ButtonInfo { buttonText = "togglable placeholder 3"},
                 new ButtonInfo { buttonText = "Long Arms", method =() => Mods.Mods.LongArms(), toolTip = "Long Arms"},
-                new ButtonInfo { buttonText = "togglable placeholder 4"},
                 new ButtonInfo { buttonText = "Really Long Arms", method =() => Mods.Mods.ReallyLongArms(), toolTip = "Longer Long Arms"},
-                new ButtonInfo { buttonText = "togglable placeholder 5"},
                 new ButtonInfo { buttonText = "Ghost Monkey", method =() => Mods.Mods.GhostMonkey(), toolTip = "Turn Into a Ghost"},
-                new ButtonInfo { buttonText = "togglable placeholder 6"},
                 new ButtonInfo { buttonText = "Wall Walk", method =() => Mods.Mods.Wallwalk(), toolTip = "Walk on Walls"},
-                new ButtonInfo { buttonText = "togglable placeholder 7"},
                 new ButtonInfo { buttonText = "Spaz Monkey", method =() => Mods.Mods.SpazMonke(), toolTip = "Bros tweaking"},
-                new ButtonInfo { buttonText = "togglable placeholder 8"},
             },
 
             new ButtonInfo[] { // Settings
