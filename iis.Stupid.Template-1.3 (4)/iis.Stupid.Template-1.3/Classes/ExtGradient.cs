@@ -8,7 +8,7 @@ namespace StupidTemplate.Classes
         public GradientColorKey[] colors = new GradientColorKey[]
         {
             new GradientColorKey(Color.black, 0f),
-            new GradientColorKey(Color.magenta, 0.5f),
+            new GradientColorKey(Color.magenta, 0.9f),//ass
             new GradientColorKey(Color.black, 1f)
         };
 

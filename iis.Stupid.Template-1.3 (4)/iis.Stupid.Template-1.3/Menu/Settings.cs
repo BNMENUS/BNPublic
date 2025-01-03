@@ -16,7 +16,7 @@ namespace StupidTemplate
         public static Color[] textColors = new Color[]
         {
             Color.white, // Disabled
-            Color.white // Enabled
+            Color.green // Enabled
         };
 
         public static Font currentFont = (Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font);
@@ -30,6 +30,6 @@ namespace StupidTemplate
         public static KeyCode keyboardButton = KeyCode.Q;
 
         public static Vector3 menuSize = new Vector3(0.1f, 1f, 1f); // Depth, Width, Height
-        public static int buttonsPerPage = 8;
+        public static int buttonsPerPage = 7;
     }
 }
