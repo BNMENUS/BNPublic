@@ -260,7 +260,7 @@ namespace StupidTemplate.Mods
                     }
             }
         }
-        public static string disconnectbuttonstring = "bvb";
+        public static string disconnectbuttonstring = "Disconnect Button {Right Secondary}";
         public static void DisconnectOnButton()
         {
             switch (disconnectbutton)
@@ -338,6 +338,19 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.leftHandTransform.transform.position = GorillaTagger.Instance.offlineVRRig.transform.position + new Vector3(0, -1, 0);
                 GorillaTagger.Instance.rightHandTransform.transform.position = GorillaTagger.Instance.offlineVRRig.transform.position + new Vector3(0, -1, 0);
             }
+        }
+
+        public static void RPCflush()
+        {
+            GorillaTagger.Instance.myVRRig.SendRPC("RPC_PlaySplashEffect", RpcTarget.All, new object[]
+                    {
+                        GorillaTagger.Instance.rightHandTransform.position,
+                        GorillaTagger.Instance.rightHandTransform.rotation,
+                        4f,
+                        100f,
+                        true,
+                        false
+                    });
         }
     }
 }
