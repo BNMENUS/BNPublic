@@ -1,109 +1,168 @@
-﻿using Photon.Pun;
-using Photon.Realtime;
-using StupidTemplate.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
-using UnityEngine.XR;
-
-
-namespace StupidTemplate.Mods
+﻿@ -120,147 + 120,147 @@
+        }
+        public static void FlyMod()
 {
-    internal class Mods
+    if (ControllerInputPoller.instance.rightControllerPrimaryButton)
     {
-        public static void MosaSpeed()
-        {
-            GorillaLocomotion.Player.Instance.maxJumpSpeed = 7.5f;
-            GorillaLocomotion.Player.Instance.jumpMultiplier = 3.5f;
-        }
+        GorillaLocomotion.Player.Instance.transform.position += (GorillaLocomotion.Player.Instance.headCollider.transform.forward * Time.deltaTime) * 15;
+        GorillaLocomotion.Player.Instance.GetComponent<Rigidbody>().velocity = Vector3.zero;
+    }
+}
 
-        public static void LongArms()
-        {
-            GorillaLocomotion.Player.Instance.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-        }
 
-        public static void ReallyLongArms()
-        {
-            GorillaLocomotion.Player.Instance.transform.localScale = new Vector3(2f, 2f, 2f);
-        }
+public static Material PlatColor = new Material(Shader.Find("GorillaTag/UberShader"));
+public static GameObject LeftPlat;
+public static GameObject RightPlat;
+static bool rightdone = false;
+static bool leftdone = false;
 
-        public static void WaterBalloonSpammer()
-        {
-            if (ControllerInputPoller.instance.rightGrab)
-            {
-                UnityEngine.Object.Destroy(GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").GetComponent<AudioSource>());
-                GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").GetComponent<SnowballThrowable>().projectilePrefab.tag = "WaterBalloonProjectile";
-                GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").GetComponent<SnowballThrowable>().randomizeColor = false;
-                return;
-            }
-            if (!GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").gameObject.GetComponent<AudioSource>())
-            {
-                GameObject.Find("Player Objects/Local VRRig/Local Gorilla Player/rig/body/shoulder.R/upper_arm.R/forearm.R/hand.R/palm.01.R/TransferrableItemRightHand/SnowballRightAnchor").transform.Find("LMACF.").gameObject.AddComponent<AudioSource>();
-            }
-        }
+public static void Platforms()
+{
+    if (ControllerInputPoller.instance.rightGrab && !rightdone)
+    {
+        RightPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        RightPlat.transform.position = new Vector3(0f, -0.05f, 0f) + GorillaLocomotion.Player.Instance.rightControllerTransform.position;
+        RightPlat.transform.rotation = GorillaLocomotion.Player.Instance.rightControllerTransform.rotation;
+        PlatColor.color = UnityEngine.Color.black;
+        RightPlat.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
+        RightPlat.GetComponent<Renderer>().material = PlatColor;
+        RightPlat.transform.localScale = new Vector3(0.01f, 0.23f, 0.362569f);
+        rightdone = true;
+    }
+    else
+    {
+        UnityEngine.Object.Destroy(RightPlat);
+        rightdone = false;
+    }
+    if (ControllerInputPoller.instance.leftGrab && !leftdone)
+    {
+        LeftPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        LeftPlat.transform.position = new Vector3(0f, -0.05f, 0f) +
+    GorillaLocomotion.Player.Instance.leftControllerTransform.position;
+        LeftPlat.transform.rotation = GorillaLocomotion.Player.Instance.leftControllerTransform.rotation;
+        PlatColor.color = UnityEngine.Color.black;
+        LeftPlat.GetComponent<Renderer>().material.shader = Shader.Find("GUI/Text Shader");
+        LeftPlat.GetComponent<Renderer>().material = PlatColor;
+        LeftPlat.transform.localScale = new Vector3(0.01f, 0.23f, 0.362569f);
+        leftdone = true;
+    }
+    else
+    {
+        UnityEngine.Object.Destroy(LeftPlat);
+        leftdone = false;
+    }
+}
 
-        public static void UntagAll()
+public static void FixSpeed()
+{
+    GorillaLocomotion.Player.Instance.maxJumpSpeed = 6.5f;
+    GorillaLocomotion.Player.Instance.jumpMultiplier = 1.2f;
+}
+public static void Noclip()
+{
+    foreach (MeshCollider meshCollider in Resources.FindObjectsOfTypeAll<MeshCollider>())
+    {
+        if (ControllerInputPoller.instance.leftControllerIndexFloat > 0f || UnityInput.Current.GetMouseButton(1))
         {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                NotifiLib.SendNotification("<color=grey>[</color><color=red>ERROR</color><color=grey>]</color> <color=white>You are not master client.</color>");
-            }
-            else
-            {
-                foreach (Photon.Realtime.Player v in PhotonNetwork.PlayerList)
-                {
-                    RemoveInfected(v);
-                }
-            }
+            meshCollider.enabled = false;
         }
-
-        private static void RemoveInfected(Player v)
+        else
         {
-            throw new NotImplementedException();
+            meshCollider.enabled = true;
         }
-
-        public static void GhostMonkey()
+    }
+}
+public static void AntiReport()
+{
+    foreach (GorillaPlayerScoreboardLine line in GorillaScoreboardTotalUpdater.allScoreboardLines)
+    {
+        Transform report = line.reportButton.gameObject.transform;
+        foreach (VRRig vrrig in GorillaParent.instance.vrrigs)
         {
-            bool Primary = ControllerInputPoller.instance.rightControllerPrimaryButton;
-            {
-                if (Primary == true)
-                {
-                    GorillaTagger.Instance.offlineVRRig.enabled = false;
-                }
-                else
-                {
-                    GorillaTagger.Instance.offlineVRRig.enabled = true;
-                }
-            }
-        }
+            float righthand = Vector3.Distance(vrrig.rightHandTransform.position, report.position);
+            float lefthand = Vector3.Distance(vrrig.leftHandTransform.position, report.position);
 
-        public static void Wallwalk()
-        {
-            bool flag = ControllerInputPoller.GripFloat((XRNode)5) == 1f;
-            if (flag)
+            if (righthand >= 0.3f || lefthand >= 0.3f)
             {
-                GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += GorillaLocomotion.Player.Instance.bodyCollider.transform.right / 7f;
-            }
-            bool flag2 = ControllerInputPoller.GripFloat((XRNode)4) == 1f;
-            if (flag2)
-            {
-                GorillaLocomotion.Player.Instance.bodyCollider.attachedRigidbody.velocity += -GorillaLocomotion.Player.Instance.bodyCollider.transform.right / 7f;
-            }
-        }
-
-        public static void SpazMonke()
-        {
-            {
-                GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
-                GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
-                GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 360));
-                GorillaTagger.Instance.offlineVRRig.head.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
-                GorillaTagger.Instance.offlineVRRig.leftHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
-                GorillaTagger.Instance.offlineVRRig.rightHand.rigTarget.eulerAngles = new Vector3((float)UnityEngine.Random.Range(0, 360), (float)UnityEngine.Random.Range(0, 180), (float)UnityEngine.Random.Range(0, 180));
+                PhotonNetwork.Disconnect();
             }
         }
+    }
+}
+public static int disconnectbutton = 0;
+public static void changedisconnectbutton()
+{
+    Main.GetIndex("Disconnect Button").overlapText = disconnectbuttonstring;
 
+    if (disconnectbutton <= 9) { disconnectbutton++; }
 
+    if (disconnectbutton >= 9) { disconnectbutton = 0; }
+
+    switch (disconnectbutton)
+    {
+        case 0:
+            {
+                disconnectbuttonstring = "Disconnect Button {Right Secondary}";
+                break;
+            }
+        case 1:
+            {
+                disconnectbuttonstring = "Disconnect Button {Right Primary}";
+                break;
+            }
+        case 2:
+            {
+                disconnectbuttonstring = "Disconnect Button {Left Secondary}";
+                break;
+            }
+        case 3:
+            {
+                disconnectbuttonstring = "Disconnect Button {Left Primary}";
+                break;
+            }
+        case 4:
+            {
+                disconnectbuttonstring = "Disconnect Button {Right Trigger}";
+                break;
+            }
+        case 5:
+            {
+                disconnectbuttonstring = "Disconnect Button {Right Grab}";
+                break;
+            }
+        case 6:
+            {
+                disconnectbuttonstring = "Disconnect Button {Left Trigger}";
+                break;
+            }
+        case 7:
+            {
+                disconnectbuttonstring = "Disconnect Button {Left Grab}";
+                break;
+            }
+    }
+}
+public static string disconnectbuttonstring = "bvb";
+public static string disconnectbuttonstring = "Disconnect Button {Right Secondary}";
+public static void DisconnectOnButton()
+{
+    switch (disconnectbutton)
+@ -339,5 + 339,18 @@ namespace StupidTemplate.Mods
+                GorillaTagger.Instance.rightHandTransform.transform.position = GorillaTagger.Instance.offlineVRRig.transform.position + new Vector3(0, -1, 0);
+}
+        }
+
+        public static void RPCflush()
+{
+    GorillaTagger.Instance.myVRRig.SendRPC("RPC_PlaySplashEffect", RpcTarget.All, new object[]
+            {
+                        GorillaTagger.Instance.rightHandTransform.position,
+                        GorillaTagger.Instance.rightHandTransform.rotation,
+                        4f,
+                        100f,
+                        true,
+                        false
+            });
+}
     }
 }
