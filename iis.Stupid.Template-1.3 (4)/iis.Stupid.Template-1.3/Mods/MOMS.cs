@@ -136,7 +136,7 @@ namespace StupidTemplate.Mods
 
         public static void Platforms()
         {
-            if (ControllerInputPoller.instance.rightGrab && !rightdone)
+            if (ControllerInputPoller.instance.rightGrab && !rightdone || Mouse.current.rightButton.isPressed && !rightdone)
             {
                 RightPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 RightPlat.transform.position = new Vector3(0f, -0.05f, 0f) + GorillaLocomotion.Player.Instance.rightControllerTransform.position;
@@ -152,7 +152,7 @@ namespace StupidTemplate.Mods
                 UnityEngine.Object.Destroy(RightPlat);
                 rightdone = false;
             }
-            if (ControllerInputPoller.instance.leftGrab && !leftdone)
+            if (ControllerInputPoller.instance.leftGrab && !leftdone || Mouse.current.rightButton.isPressed && !leftdone)
             {
                 LeftPlat = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 LeftPlat.transform.position = new Vector3(0f, -0.05f, 0f) +
