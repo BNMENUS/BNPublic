@@ -339,5 +339,15 @@ namespace StupidTemplate.Mods
                 GorillaTagger.Instance.rightHandTransform.transform.position = GorillaTagger.Instance.offlineVRRig.transform.position + new Vector3(0, -1, 0);
             }
         }
+
+        public static void TagGun()
+        {
+            Gunlib.Gunlib(() =>
+            {
+                Gorillatagger.instance.offlineVRRig.enbled = false;
+
+                Gorillatagger.instance.transform.position = Gunlib.locked.transform.position;
+            });
+        }
     }
 }
